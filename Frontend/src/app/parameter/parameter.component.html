@@ -1,0 +1,110 @@
+<body>
+<div class="container p-5 mt-0">
+  <div class="main-content" [ngClass]="{ 'blur-background': isupdate || isdelete }">
+    <h2 class="mt-4 mb-4">Parameters for Feature: {{featureName}}</h2>
+    <!-- List of Parameters -->
+    <div *ngIf="parameters.length > 0" class="card mb-4">
+      <div class="card-body">
+        <h3 class="card-title">Parameters</h3>
+        <ul>
+          <li *ngFor="let parameter of parameters">
+            {{ parameter.name }} - {{ parameter.internalName }} - {{ parameter.details }} - {{ parameter.parameterType }}
+            <div *ngIf="isAdmin;">
+              <button class="btn btn-primary ml-2" (click)="editParameter(parameter)">Edit</button>
+              <button class="btn btn-danger ml-2" (click)="deleteParameter(parameter.internalName)">Delete</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Add Parameter Form -->
+    <div *ngIf="!isEditing" class="card mb-4">
+      <div *ngIf="isAdmin;">
+        <div class="card-body">
+          <h3 class="card-title">Add Parameter</h3>
+          <form (submit)="addParameter(newParameter)">
+            <label for="parameterName">Name:</label>
+            <input id="parameterName" [(ngModel)]="newParameter.name" name="parameterName" class="form-control" required>
+            <label for="parameterInternalName">Internal Name:</label>
+            <input id="parameterInternalName" [(ngModel)]="newParameter.internalName" name="parameterInternalName" class="form-control" required>
+            <label for="parameterDetails">Details:</label>
+            <input id="parameterDetails" [(ngModel)]="newParameter.details" name="parameterDetails" class="form-control" required>
+            <label for="parameterType">Parameter Type:</label>
+            <select id="parameterType" [(ngModel)]="newParameter.parameterType" name="parameterType" class="form-control" required>
+              <option value="QUANTITY">Quantity</option>
+              <option value="PRICE">Price</option>
+              <option value="OTHER">Other</option>
+            </select>
+            <div *ngIf="newParameter.parameterType === 'PRICE'">
+              <div *ngIf="!isValidFloat(newParameter.value)">Price must be a valid float/double value.</div>
+            </div>
+            <div *ngIf="newParameter.parameterType === 'QUANTITY'">
+              <div *ngIf="!isValidInteger(newParameter.value)">Quantity must be an integer value.</div>
+            </div>
+            <label for="parameterValue">Value:</label>
+            <input type="text" id="parameterValue" [(ngModel)]="newParameter.value" name="parameterValue" class="form-control" required>
+            <button class="btn btn-success mt-2" type="submit">Add Parameter</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Edit Parameter Form -->
+
+    <div *ngIf="isEditing" class="card mb-4">
+      <div *ngIf="isAdmin;">
+        <div class="card-body">
+          <h3 class="card-title">Edit Parameter</h3>
+          <form (submit)="updateParameter(selectedParameter)">
+            <label for="editParameterName">Name:</label>
+              <input id="editParameterName" [(ngModel)]="selectedParameter.name" name="editParameterName" class="form-control" required>
+            <label for="editParameterInternalName">Internal Name:</label>
+              <input id="editParameterInternalName" [(ngModel)]="selectedParameter.internalName" name="editParameterInternalName" class="form-control" readonly>
+            <label for="editParameterDetails">Details:</label>
+              <input id="editParameterDetails" [(ngModel)]="selectedParameter.details" name="editParameterDetails" class="form-control" required>
+            <label for="editParameterType">Parameter Type:</label>
+            <input id="editParameterType" [(ngModel)]="selectedParameter.parameterType" name="editParameterType" class="form-control" readonly>
+            <div *ngIf="selectedParameter.parameterType === 'PRICE'">
+              <label for="editParameterValue">Value:</label>
+              <input id="editParameterValue" [(ngModel)]="selectedParameter.value" name="editParameterValue" class="form-control" required>
+              <div *ngIf="!isValidFloat(selectedParameter.value)">Price must be a valid float/double value.</div>
+            </div>
+            <div *ngIf="selectedParameter.parameterType === 'QUANTITY'">
+              <label for="editParameterValue">Value:</label>
+              <input id="editParameterValue" [(ngModel)]="selectedParameter.value" name="editParameterValue" class="form-control" required>
+              <div *ngIf="!isValidInteger(selectedParameter.value)">Quantity must be an integer value.</div>
+            </div>
+            <div *ngIf="selectedParameter.parameterType === 'OTHER'">
+              <label for="editParameterValue">Value:</label>
+              <input id="editParameterValue" [(ngModel)]="selectedParameter.value" name="editParameterValue" class="form-control" required>
+              
+            </div>
+            <button class="btn btn-success mt-2" type="submit">Update Parameter</button>
+            <button class="btn btn-secondary ml-2" type="button" (click)="cancelEdit()">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" [ngClass]="{ 'd-block': isupdate }">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content custom-message-box">
+        <div class="modal-body custom-modal-body">
+          <p class="custom-message-box">Parameter updated successfully! Please reload the page to see the changes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" [ngClass]="{ 'd-block': isdelete }">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content custom-message-box">
+        <div class="modal-body custom-modal-body">
+          <p class="custom-message-box">Parameter deleted successfully! Please reload the page to see the changes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>

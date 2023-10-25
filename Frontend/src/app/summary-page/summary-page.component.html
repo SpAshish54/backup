@@ -1,0 +1,39 @@
+<!-- summary-page.component.html -->
+
+<div class="container p-5 mt-0">
+    <h2>Product Hierarchy</h2>
+  
+    <div *ngFor="let product of products" class="card mb-4">
+      <div class="card-body">
+        <h3 class="card-title">Product: {{ product.name }}</h3>
+        <p class="card-text">Internal Name: {{ product.internalName }}</p>
+  
+        <!-- Button to show features -->
+        <button class="btn btn-primary" (click)="viewFeatures(product)">View Features</button>
+        
+        <!-- Features section -->
+        <div *ngIf="selectedProduct === product && features.length > 0">
+          <br>
+          <h4>Features:</h4>
+          <ul>
+            <li *ngFor="let feature of features">
+              <strong>Feature:</strong> {{ feature.name }}
+              <button class="btn btn-info" (click)="viewParameters(feature)">View Parameters</button>
+              <br>
+              <!-- Parameters section for the feature -->
+              <div *ngIf="selectedFeature === feature && parameters.length > 0">
+                <h5>Parameters:</h5>
+                <ul>
+                  <li *ngFor="let parameter of parameters">
+                    <strong>Parameter:</strong> {{ parameter.name }}
+                    <br>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
