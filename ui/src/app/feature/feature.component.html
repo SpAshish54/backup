@@ -1,0 +1,93 @@
+<html>
+<body>
+<app-navbar></app-navbar>
+<div class="container p-5 mt-0">
+  <div class="main-content" [ngClass]="{ 'blur-background': isupdateFeature || isDelete }">
+    <h2 class="mt-4 mb-4"> Feature for Product: {{ internalName }}</h2>
+
+    <div *ngFor="let feature of features" class="card mb-4">
+      <div class="card-body">
+        <h3 class="card-title">Feature Details:</h3>
+        <p class="card-text"><strong>Name: </strong>{{ feature.name }}</p>
+
+        <div *ngIf="isEditing && feature.internalName === selectedFeature.internalName">
+
+          <label for="editedFeatureName">Edited Feature Name:</label>
+          <input id="editedFeatureName" [(ngModel)]="selectedFeature.name" name="editedFeatureName" class="form-control" required>
+          <label for="editedFeatureInternalName">Edited Feature Internal Name:</label>
+          <input
+            id="editedFeatureInternalName"
+            [(ngModel)]="selectedFeature.internalName"
+            name="editedFeatureInternalName"
+            class="form-control"
+            required
+            [attr.readonly]="isFeatureSelected ? 'readonly' : null"
+          >
+          <label for="editedFeatureDetails">Edited Feature Details:</label>
+          <input id="editedFeatureDetails" [(ngModel)]="selectedFeature.details" name="editedFeatureDetails" class="form-control" required>
+          <!-- Add more fields as needed -->
+
+          <button class="btn btn-success mt-2" (click)="updateFeature()">Update Feature</button>
+          <button class="btn btn-secondary mt-2" (click)="cancelEdit()">Cancel</button>
+        </div>
+
+        <div *ngIf="!isEditing || feature.internalName !== selectedFeature.internalName">
+          <!-- Display feature details -->
+          <div *ngIf="isAdmin;">
+            <button class="btn btn-danger mr-2" (click)="deleteFeature(feature)">Delete Feature</button>
+            <button class="btn btn-warning ml-2" (click)="editFeature(feature)">Edit</button>
+          </div>
+          <button class="button" (click)="viewParameters(feature.internalName, feature.name)">View Parameters</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!isAddingFeature">
+      <div *ngIf="isAdmin;">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h3 class="card-title">Add Feature:</h3>
+            <form (submit)="addFeatureToProduct()">
+              <label for="newFeatureName">Feature Name:</label>
+              <input id="newFeatureName" [(ngModel)]="selectedFeature.name" name="newFeatureName" class="form-control" required>
+              <label for="newFeatureInternalName">Feature Internal Name:</label>
+              <input id="newFeatureInternalName" [(ngModel)]="selectedFeature.internalName" name="newFeatureInternalName" class="form-control" required>
+              <label for="newFeatureDetails">Feature Details:</label>
+              <input id="newFeatureDetails" [(ngModel)]="selectedFeature.details" name="newFeatureDetails" class="form-control" required>
+              <!-- Add more fields for the feature as needed -->
+              <button class="btn btn-success mt-2" type="submit">Add Feature</button>
+            </form>
+          </div>
+        </div>
+        <button class="btn1" (click)="cancelFeature()">Cancel</button>
+      </div>
+    </div>
+    <div *ngIf="isAddingFeature">
+      <div *ngIf="isAdmin">
+        <button class="btn1" (click)="addFeature()">Add a new Feature</button>
+      </div>
+    </div>
+  </div>
+  <!-- ... Modal and other elements ... -->
+  <div class="modal" [ngClass]="{ 'd-block': isupdateFeature }">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content custom-message-box">
+        <div class="modal-body custom-modal-body">
+          <p class="custom-message-box">Product updated successfully! Please reload the page to see the changes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" [ngClass]="{ 'd-block': isDelete }">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content custom-message-box">
+        <div class="modal-body custom-modal-body">
+          <p class="custom-message-box">Product deleted successfully! Please reload the page to see the changes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

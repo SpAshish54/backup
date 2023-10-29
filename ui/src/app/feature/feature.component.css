@@ -1,0 +1,80 @@
+/* feature.component.css */
+
+/* Adjust the card styling */
+.card {
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+  margin-bottom: 20px;
+}
+
+/* Style the buttons */
+.btn1 {
+  background-color: #110223;
+  color: white;
+  padding: 10px 20px; /* Consistent padding for all buttons */
+  font-size: 14px; /* Font size */
+  border-radius: 5px; /* Rounded corners */
+}
+
+
+.btn {
+  padding: 10px 20px; /* Consistent padding for all buttons */
+  font-size: 14px; /* Font size */
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* Add spacing to the form controls */
+.form-control {
+  margin-bottom: 15px; /* Increased margin for better spacing */
+}
+
+.custom-modal-body {
+  color: #e72929a0; /* Choose a color that contrasts well with your background */
+}
+
+/* Additional custom styles for your feature component */
+.main-content.blur-background {
+  filter: blur(5px); /* Adjust the blur amount as needed */
+  pointer-events: none; /* Prevent clicking on blurred elements */
+}
+
+.custom-message-box {
+  background-color: black;
+  color: white; /* Set text color to white for better readability on a dark background */
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: linear-gradient(to right, #667eea, #764ba2);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-success,
+  .btn-secondary {
+    width: 150px; 
+    margin-right: 10px;
+  }
+
+.btn-danger,
+  .btn-warning{
+      width: 450px;
+      margin-right: 20px;
+      font-size: medium;
+    }
+
+.button{
+  width: 915px;
+  margin-top: 10px;
+  padding: 8px 0px;
+  border-radius: 4px;
+  background-color: #131a5a;
+  color: aliceblue;
+  font-size: medium;
+}

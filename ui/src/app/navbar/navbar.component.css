@@ -1,0 +1,17 @@
+/* Navbar Styling with Bootstrap */
+.navbar {
+  background-color: #110223;
+  z-index: 1000; 
+}
+
+.navbar a {
+  color: rgb(247, 243, 243);
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+  background-color: #342565; /* Slightly Darker Shade on Hover */
+}
+

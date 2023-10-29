@@ -1,0 +1,72 @@
+.main-content.blur-background {
+  filter: blur(5px); /* Adjust the blur amount as needed */
+  pointer-events: none; /* Prevent clicking on blurred elements */
+}
+
+.custom-message-box {
+  background-color: black;
+  color: white; /* Set text color to white for better readability on a dark background */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Arial', sans-serif;
+}
+
+.container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 20px;
+  padding: 20px;
+}
+
+.card {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.parameter-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.parameter-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.parameter-actions {
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  margin-left: 10px;
+}
+
+.parameter-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.parameter-list-item {
+  margin-bottom: 10px;
+}
